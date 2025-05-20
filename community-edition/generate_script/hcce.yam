@@ -325,7 +325,7 @@ data:
     # ^^^ has to be string or elixir throws (ArgumentError) argument error:erlang.byte_size(#), but why
 
     [ret."Elixir.RetWeb.Email"]
-    from = "noreply@<HUB_DOMAIN>"
+    from = "devops@eduverse.com"
 
     [ret."Elixir.Ret.Mailer"]
     server = "<SMTP_SERVER>"
@@ -341,15 +341,15 @@ data:
     # Adding URLs that are local to your cluster is unnecessary.
     [ret."Elixir.RetWeb.Plugs.AddCSP"]
     child_src = ""
-    connect_src = "demo.hubsfoundation.org *.demo.hubsfoundation.org"
-    font_src = ""
+    connect_src = "https://*.eduverse.com https://avnfs.com https://*.avnfs.com https://*.avncloud.com https://*.avnlan.link:*"
+    font_src = "https://avnfs.com https://*.avnfs.com https://*.avnlan.link:*"
     form_action = ""
     frame_src = ""
-    img_src = "demo.hubsfoundation.org *.demo.hubsfoundation.org"
+    img_src = "https://*.eduverse.com https://avnfs.com https://*.avnfs.com https://*.avncloud.com https://*.avnlan.link:*"
     manifest_src = ""
-    media_src = "demo.hubsfoundation.org *.demo.hubsfoundation.org"
+    media_src = "https://*.eduverse.com https://avnfs.com https://*.avnfs.com https://*.avncloud.com https://*.avnlan.link:*"
     script_src = ""
-    style_src = ""
+    style_src = "https://avnfs.com https://*.avnfs.com https://*.avnlan.link:*"
     worker_src = ""
 
     [ret."Ret.Repo.Migrations.AdminSchemaInit"]

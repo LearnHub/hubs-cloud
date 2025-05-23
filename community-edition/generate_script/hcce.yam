@@ -383,6 +383,14 @@ data:
     realm = "turkey"
     public_tls_ports = "5349"
 
+    [ret."Elixir.Ret.RemoteOIDCClient"]
+    openid_configuration = ""
+    scopes = ""
+    permitted_claims = ""
+    client_id = ""
+    client_secret = ""
+    additional_authorization_parameters = ""
+
     [web_push_encryption.vapid_details]
     subject = ""
     public_key = ""

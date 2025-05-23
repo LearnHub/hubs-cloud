@@ -445,7 +445,7 @@ spec:
         image: $Container_Dockerhub_Username/reticulum:$Container_Tag
         ports:
         - containerPort: 9100
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: POD_IP
           valueFrom:
@@ -581,7 +581,7 @@ spec:
         image: $Container_Dockerhub_Username/postgrest:$Container_Tag
         ports:
         - containerPort: 3000
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: PGRST_LOG_LEVEL
           value: info
@@ -700,7 +700,7 @@ spec:
     spec:
       containers:
       - image: $Container_Dockerhub_Username/pgbouncer:$Container_Tag
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: pgbouncer
         env:
         - name: MAX_CLIENT_CONN
@@ -749,7 +749,7 @@ spec:
     spec:
       containers:
       - image: $Container_Dockerhub_Username/pgbouncer:$Container_Tag
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: pgbouncer-t
         env:
         - name: MAX_CLIENT_CONN
@@ -811,7 +811,7 @@ spec:
       containers:
       - name: hubs
         image: $Container_Dockerhub_Username/hubs:$Container_Tag
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: turkeyCfg_thumbnail_server
           value: 'cors.$HUB_DOMAIN/nearspark'
@@ -881,7 +881,7 @@ spec:
       containers:
       - name: spoke
         image: $Container_Dockerhub_Username/spoke:$Container_Tag
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: turkeyCfg_thumbnail_server
           value: 'cors.$HUB_DOMAIN/nearspark'
@@ -953,7 +953,7 @@ spec:
         image: $Container_Dockerhub_Username/nearspark:$Container_Tag
         ports:
         - containerPort: 5000
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -991,7 +991,7 @@ spec:
 #     spec:
 #       containers:
 #       - image: $Container_Dockerhub_Username/speelycaptor:$Container_Tag
-#         imagePullPolicy: IfNotPresent
+#         imagePullPolicy: Always
 #         name: speelycaptor
 #         env:
 #         - name: scratchBucketId
@@ -1046,7 +1046,7 @@ spec:
       containers:
       - name: photomnemonic
         image: $Container_Dockerhub_Username/photomnemonic:$Container_Tag
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service

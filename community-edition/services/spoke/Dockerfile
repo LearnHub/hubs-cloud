@@ -3,6 +3,7 @@
 # the result container should serve reticulum as "spoke_page_origin" on (path) "/spoke/pages"
 ###
 from node:16.13 as builder
+ENV PUPPETEER_SKIP_DOWNLOAD true
 run mkdir /spoke && cd /spoke
 copy package.json ./
 copy yarn.lock ./

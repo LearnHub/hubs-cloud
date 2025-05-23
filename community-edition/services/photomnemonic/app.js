@@ -5,7 +5,7 @@ const utils = require('./utils')
 
 async function main() {
   console.log("hello")
-  const browser= await utils.GetBrowser()
+//  const browser= await utils.GetBrowser()
   
   // const test=async () => {
   //   await new Promise(r => setTimeout(r, 5555));

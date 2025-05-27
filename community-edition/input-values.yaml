@@ -1,5 +1,4 @@
 HUB_DOMAIN: "hubs.local"
-SVC_DOMAIN: "svcs.local"
 ADM_EMAIL: "devops@eduverse.com"
 Namespace: "hcce"
 Container_Dockerhub_Username: "avncloud"

@@ -49,9 +49,9 @@ To deploy to your K8s cluster on your chosen hosting solution, follow these step
 - Expose the services
   - On your DNS service, create four A-records to route your domains to the external IP address of your load balancer
     - <root_domain>
-    - assets.<root_domain>
-    - stream.<root_domain>
-    - cors.<root_domain>
+    - assets-<root_domain>
+    - stream-<root_domain>
+    - cors-<root_domain>
 
 - Configure your HTTPS certs
   - Option #1: bring your own

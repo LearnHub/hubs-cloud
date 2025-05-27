@@ -55,10 +55,11 @@ function main() {
     const config = utils.readConfig();
     const template = utils.readTemplate("ssl_script", "cbb.yam");
     const rootHubDomain = config.HUB_DOMAIN;
+    const rootSvcDomain = config.SVC_DOMAIN;
     generate_ssl(config, template, rootHubDomain);
-    generate_ssl(config, template, `assets.${rootHubDomain}`);
-    generate_ssl(config, template, `stream.${rootHubDomain}`);
-    generate_ssl(config, template, `cors.${rootHubDomain}`);
+    generate_ssl(config, template, `assets-${rootSvcDomain}`);
+    generate_ssl(config, template, `stream-${rootSvcDomain}`);
+    generate_ssl(config, template, `cors-${rootSvcDomain}`);
   } catch (error) {
     console.error("Error in main function:", error);
   }

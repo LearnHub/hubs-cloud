@@ -17,6 +17,7 @@ metadata:
 stringData:
   NODE_COOKIE: "$NODE_COOKIE"
   HUB_DOMAIN: "$HUB_DOMAIN"
+  SVC_DOMAIN: "$SVC_DOMAIN"
   DB_USER: "$DB_USER"
   DB_PASS: "$DB_PASS"
   DB_NAME: "$DB_NAME"
@@ -55,14 +56,14 @@ spec:
       - $HUB_DOMAIN
     secretName: cert-$HUB_DOMAIN
   - hosts:
-      - assets.$HUB_DOMAIN
-    secretName: cert-assets.$HUB_DOMAIN
+      - assets.$SVC_DOMAIN
+    secretName: cert-assets.$SVC_DOMAIN
   - hosts:
-      - stream.$HUB_DOMAIN
-    secretName: cert-stream.$HUB_DOMAIN
+      - stream.$SVC_DOMAIN
+    secretName: cert-stream.$SVC_DOMAIN
   - hosts:
-      - cors.$HUB_DOMAIN
-    secretName: cert-cors.$HUB_DOMAIN
+      - cors.$SVC_DOMAIN
+    secretName: cert-cors.$SVC_DOMAIN
   rules:
   - host: $HUB_DOMAIN
     http:
@@ -74,7 +75,7 @@ spec:
             name: ret
             port:
               number: 4001
-  - host: assets.$HUB_DOMAIN
+  - host: assets.$SVC_DOMAIN
     http:
       paths:
       - path: /files/
@@ -105,7 +106,7 @@ spec:
             name: spoke
             port:
               number: 8080
-  - host: cors.$HUB_DOMAIN
+  - host: cors.$SVC_DOMAIN
     http:
       paths:
       - path: /files/
@@ -149,10 +150,10 @@ metadata:
 spec:
   tls:
   - hosts:
-      - stream.$HUB_DOMAIN
-    secretName: cert-stream.$HUB_DOMAIN
+      - stream.$SVC_DOMAIN
+    secretName: cert-stream.$SVC_DOMAIN
   rules:
-  - host: stream.$HUB_DOMAIN
+  - host: stream.$SVC_DOMAIN
     http:
       paths:
       - path: /
@@ -174,10 +175,10 @@ metadata:
 spec:
   tls:
   - hosts:
-      - cors.$HUB_DOMAIN
-    secretName: cert-cors.$HUB_DOMAIN
+      - cors.$SVC_DOMAIN
+    secretName: cert-cors.$SVC_DOMAIN
   rules:
-  - host: cors.$HUB_DOMAIN
+  - host: cors.$SVC_DOMAIN
     http:
       paths:
       - path: /nearspark
@@ -227,7 +228,7 @@ data:
     [ret."Elixir.RetWeb.Endpoint".secondary_url]
 
     [ret."Elixir.RetWeb.Endpoint".cors_proxy_url]
-    host = "cors.<HUB_DOMAIN>"
+    host = "cors.<SVC_DOMAIN>"
     port = 443
 
     [ret."Elixir.RetWeb.Endpoint".imgproxy_url]
@@ -235,7 +236,7 @@ data:
     port = 5000
 
     [ret."Elixir.RetWeb.Endpoint".assets_url]
-    host = "assets.<DOMAIN>"
+    host = "assets.<SVC_DOMAIN>"
     port = 443
 
     [ret."Elixir.RetWeb.Endpoint".link_url]
@@ -278,7 +279,7 @@ data:
     http_port = 9631
 
     [ret."Elixir.Ret.JanusLoadStatus"]
-    default_janus_host = "stream.<DOMAIN>"
+    default_janus_host = "stream.<SVC_DOMAIN>"
     janus_service_name = ""
     janus_admin_secret = ""
     janus_admin_port = 7000
@@ -477,6 +478,11 @@ spec:
             secretKeyRef:
               name: configs
               key: HUB_DOMAIN
+        - name: turkeyCfg_SVC_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: SVC_DOMAIN
         - name: turkeyCfg_DOMAIN
           valueFrom:
             secretKeyRef:
@@ -822,15 +828,15 @@ spec:
         imagePullPolicy: Always
         env:
         - name: turkeyCfg_thumbnail_server
-          value: 'cors.$HUB_DOMAIN/nearspark'
+          value: 'cors.$SVC_DOMAIN/nearspark'
         - name: turkeyCfg_base_assets_path
-          value: https://assets.$HUB_DOMAIN/hubs/
+          value: https://assets.$SVC_DOMAIN/hubs/
         - name: turkeyCfg_non_cors_proxy_domains
-          value: "$HUB_DOMAIN,assets.$HUB_DOMAIN,demo.hubsfoundation.org,*.demo.hubsfoundation.org"
+          value: "$HUB_DOMAIN,assets.$SVC_DOMAIN,demo.hubsfoundation.org,*.demo.hubsfoundation.org"
         - name: turkeyCfg_reticulum_server
           value: $HUB_DOMAIN
         - name: turkeyCfg_cors_proxy_server
-          value: cors.$HUB_DOMAIN
+          value: cors.$SVC_DOMAIN
         - name: turkeyCfg_shortlink_domain
           value: $HUB_DOMAIN
         - name: turkeyCfg_tier
@@ -892,15 +898,15 @@ spec:
         imagePullPolicy: Always
         env:
         - name: turkeyCfg_thumbnail_server
-          value: 'cors.$HUB_DOMAIN/nearspark'
+          value: 'cors.$SVC_DOMAIN/nearspark'
         - name: turkeyCfg_base_assets_path
-          value: https://assets.$HUB_DOMAIN/spoke/
+          value: https://assets.$SVC_DOMAIN/spoke/
         - name: turkeyCfg_non_cors_proxy_domains
-          value: "$HUB_DOMAIN,assets.$HUB_DOMAIN,demo.hubsfoundation.org,*.demo.hubsfoundation.org"
+          value: "$HUB_DOMAIN,assets.$SVC_DOMAIN,demo.hubsfoundation.org,*.demo.hubsfoundation.org"
         - name: turkeyCfg_reticulum_server
           value: $HUB_DOMAIN
         - name: turkeyCfg_cors_proxy_server
-          value: cors.$HUB_DOMAIN
+          value: cors.$SVC_DOMAIN
         - name: turkeyCfg_shortlink_domain
           value: $HUB_DOMAIN
         - name: turkeyCfg_hubs_server

@@ -1180,6 +1180,7 @@ spec:
       - name: certs
         secret:
           secretName: cert-stream-$HUB_DOMAIN
+          optional: true
 ---
 apiVersion: v1
 kind: Service

@@ -8,7 +8,9 @@ module.exports = {
     try {
       const configPath = path.join(process.cwd(), "input-values.yaml");
       const fileContents = fs.readFileSync(configPath, "utf8");
-      return YAML.parse(fileContents);
+      const secretsConfigPath = path.join(process.cwd(), "secret-values.yaml");
+      const secretsFileContents = fs.readFileSync(secretsConfigPath, "utf8");
+      return YAML.parse(secretsFileContents + "\n" + fileContents);
     } catch (error) {
       console.error("Error reading config file:", error);
       throw error;

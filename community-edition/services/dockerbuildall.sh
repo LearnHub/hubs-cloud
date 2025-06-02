@@ -2,7 +2,7 @@
 
 set -e
 
-docker_username=""
+docker_username="avncloud"
 
 ########################
 tagPrefix=""
@@ -16,7 +16,7 @@ images=""
 for dir in */ ; do
     if [ -d "$dir" ]; then
         dir="${dir%/}"
-        tag_name=$tagPrefix"${dir,,}"
+        tag_name=$tagPrefix"${dir}:alpha"
         msg="Building Docker image (-t $tag_name) for $dir"
         msg_len=${#msg}
         pad=$(printf '#%.0s' $(seq 1 $((msg_len + 8))))

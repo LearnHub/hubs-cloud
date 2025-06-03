@@ -1,9 +1,10 @@
 # AVN: Sensitive entries are in secret-values.yaml, which is outside of source control
-HUB_DOMAIN: "hubs.local"
+HUB_DOMAIN: "hubs.localhost"
 ADM_EMAIL: "devops@eduverse.com"
 Namespace: "hcce"
 Container_Dockerhub_Username: "avncloud"
-Container_Tag: "alpha"
+# Should be one of local, alpha, prod
+Container_Tag: "local"
 #DB_USER: "postgres"
 #DB_PASS: "123456"
 DB_NAME: "retdb"

@@ -8,6 +8,8 @@
     "apply": "node apply/index.js && node get_ip/index.js",
     "get-ip": "node get_ip/index.js",
     "gen-ssl": "node ssl_script/index.js",
+    "build": "bash services/dockerbuildall.sh build",
+    "push": "bash services/dockerbuildall.sh push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

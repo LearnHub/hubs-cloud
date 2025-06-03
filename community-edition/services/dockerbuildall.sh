@@ -51,4 +51,8 @@ for dir in */ ; do
     fi
 done
 
-printf "\nProcessed:${images_processed}\n"
+if [ $build_or_push == "build" ]; then
+    printf "\nBuilt:${images_processed}\n"
+else
+    printf "\nPushed:${images_processed}\n"
+fi

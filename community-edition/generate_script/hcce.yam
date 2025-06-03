@@ -35,6 +35,12 @@ stringData:
   PSQL: "$PSQL"
   PERMS_KEY: '$PERMS_KEY'
   PGRST_JWT_SECRET: '$PGRST_JWT_SECRET'
+  OIDC_OPENID_CONFIGURATION: "$OIDC_OPENID_CONFIGURATION"
+  OIDC_SCOPES: "$OIDC_SCOPES"
+  OIDC_PERMITTED_CLAIMS: "$OIDC_PERMITTED_CLAIMS"
+  OIDC_CLIENT_ID: "$OIDC_CLIENT_ID"
+  OIDC_CLIENT_SECRET: "$OIDC_CLIENT_SECRET"
+  OIDC_ADDITIONAL_AUTHORIZATION_PARAMETERS: "$OIDC_ADDITIONAL_AUTHORIZATION_PARAMETERS"
 ---
 ######################################################################################
 ###################################### ingress #######################################
@@ -559,6 +565,36 @@ spec:
             secretKeyRef:
               name: configs
               key: TENOR_API_KEY
+        - name: turkeyCfg_OIDC_OPENID_CONFIGURATION
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: OIDC_OPENID_CONFIGURATION
+        - name: turkeyCfg_OIDC_SCOPES
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: OIDC_SCOPES
+        - name: turkeyCfg_OIDC_PERMITTED_CLAIMS
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: OIDC_PERMITTED_CLAIMS
+        - name: turkeyCfg_OIDC_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: OIDC_CLIENT_ID
+        - name: turkeyCfg_OIDC_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: OIDC_CLIENT_SECRET
+        - name: turkeyCfg_OIDC_ADDITIONAL_AUTHORIZATION_PARAMETERS
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: OIDC_ADDITIONAL_AUTHORIZATION_PARAMETERS
         - name: turkeyCfg_YTDL_HOST
           value: "http://ytdl:5000"
         - name: turkeyCfg_PHOTOMNEMONIC

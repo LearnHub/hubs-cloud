@@ -390,12 +390,12 @@ data:
     public_tls_ports = "5349"
 
     [ret."Elixir.Ret.RemoteOIDCClient"]
-    openid_configuration = ""
-    scopes = ""
-    permitted_claims = ""
-    client_id = ""
-    client_secret = ""
-    additional_authorization_parameters = ""
+    openid_configuration = "<OIDC_OPENID_CONFIGURATION>"
+    scopes = "<OIDC_SCOPES>"
+    permitted_claims = "<OIDC_PERMITTED_CLAIMS>"
+    client_id = "<OIDC_CLIENT_ID>"
+    client_secret = "<OIDC_CLIENT_SECRET>"
+    additional_authorization_parameters = "<OIDC_ADDITIONAL_AUTHORIZATION_PARAMETERS>"
 
     [web_push_encryption.vapid_details]
     subject = ""

@@ -173,7 +173,8 @@ function main() {
 
     // Generate keys and certificate
     const { privateKey, publicKey } = generateKeys();
-    const { pemCert, pemPrivateKey } = generateCertificate(config.HUB_DOMAIN);
+    // Initial certificate is generic for local testing and expected to be replaced
+    const { pemCert, pemPrivateKey } = generateCertificate("*.localhost");
 
     processedConfig.PGRST_JWT_SECRET = convertPemToJwk(publicKey);
     processedConfig.PERMS_KEY = privateKey.replace(/\n/g, "\\\\n");

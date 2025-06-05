@@ -456,7 +456,7 @@ spec:
           mountPath: /home/ret
         securityContext:
           privileged: true
-        image: $Container_Dockerhub_Username/reticulum:$Container_Tag
+        image: $Container_Dockerhub_Username/reticulum:$CONTAINER_TAG
         ports:
         - containerPort: 9100
         imagePullPolicy: Always
@@ -622,7 +622,7 @@ spec:
             successThreshold: 5
             failureThreshold: 100
       - name: postgrest
-        image: $Container_Dockerhub_Username/postgrest:$Container_Tag
+        image: $Container_Dockerhub_Username/postgrest:$CONTAINER_TAG
         ports:
         - containerPort: 3000
         imagePullPolicy: Always
@@ -695,7 +695,7 @@ spec:
     spec:
       containers:
         - name: postgresql
-          image: $Container_Dockerhub_Username/postgres:$Container_Tag
+          image: $Container_Dockerhub_Username/postgres:$CONTAINER_TAG
           ports:
             - name: postgresql
               containerPort: 5432
@@ -743,7 +743,7 @@ spec:
         app: pgbouncer
     spec:
       containers:
-      - image: $Container_Dockerhub_Username/pgbouncer:$Container_Tag
+      - image: $Container_Dockerhub_Username/pgbouncer:$CONTAINER_TAG
         imagePullPolicy: Always
         name: pgbouncer
         env:
@@ -792,7 +792,7 @@ spec:
         app: pgbouncer-t
     spec:
       containers:
-      - image: $Container_Dockerhub_Username/pgbouncer:$Container_Tag
+      - image: $Container_Dockerhub_Username/pgbouncer:$CONTAINER_TAG
         imagePullPolicy: Always
         name: pgbouncer-t
         env:
@@ -854,7 +854,7 @@ spec:
     spec:
       containers:
       - name: hubs
-        image: $Container_Dockerhub_Username/hubs:$Container_Tag
+        image: $Container_Dockerhub_Username/hubs:$CONTAINER_TAG
         imagePullPolicy: Always
         env:
         - name: turkeyCfg_thumbnail_server
@@ -924,7 +924,7 @@ spec:
     spec:
       containers:
       - name: spoke
-        image: $Container_Dockerhub_Username/spoke:$Container_Tag
+        image: $Container_Dockerhub_Username/spoke:$CONTAINER_TAG
         imagePullPolicy: Always
         env:
         - name: turkeyCfg_thumbnail_server
@@ -994,7 +994,7 @@ spec:
     spec:
       containers:
       - name: nearspark
-        image: $Container_Dockerhub_Username/nearspark:$Container_Tag
+        image: $Container_Dockerhub_Username/nearspark:$CONTAINER_TAG
         ports:
         - containerPort: 5000
         imagePullPolicy: Always
@@ -1034,7 +1034,7 @@ spec:
 #         app: speelycaptor
 #     spec:
 #       containers:
-#       - image: $Container_Dockerhub_Username/speelycaptor:$Container_Tag
+#       - image: $Container_Dockerhub_Username/speelycaptor:$CONTAINER_TAG
 #         imagePullPolicy: Always
 #         name: speelycaptor
 #         env:
@@ -1089,7 +1089,7 @@ spec:
     spec:
       containers:
       - name: photomnemonic
-        image: $Container_Dockerhub_Username/photomnemonic:$Container_Tag
+        image: $Container_Dockerhub_Username/photomnemonic:$CONTAINER_TAG
         imagePullPolicy: Always
 ---
 apiVersion: v1
@@ -1142,7 +1142,7 @@ spec:
       hostNetwork: true
       containers:
       - name: dialog
-        image: $Container_Dockerhub_Username/dialog:$Container_Tag
+        image: $Container_Dockerhub_Username/dialog:$CONTAINER_TAG
         imagePullPolicy: Always
         ports:
         - hostPort: 4443
@@ -1195,7 +1195,7 @@ spec:
       hostNetwork: true
       containers:
       - name: coturn
-        image: $Container_Dockerhub_Username/coturn:$Container_Tag
+        image: $Container_Dockerhub_Username/coturn:$CONTAINER_TAG
         imagePullPolicy: Always
         ports:
         - hostPort: 5349
@@ -1296,7 +1296,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
       - name: haproxy
-        image: $Container_Dockerhub_Username/haproxy:$Container_Tag
+        image: $Container_Dockerhub_Username/haproxy:$CONTAINER_TAG
         args:
         - --configmap=$Namespace/haproxy-config
         - --https-bind-port=4443

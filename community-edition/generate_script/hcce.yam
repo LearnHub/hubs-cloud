@@ -52,8 +52,8 @@ metadata:
   namespace: $Namespace
   annotations:
     kubernetes.io/ingress.class: haproxy
-    haproxy.org/response-set-header: |
-      access-control-allow-origin "https://$HUB_DOMAIN"
+    # haproxy.org/response-set-header: |
+    #   access-control-allow-origin "https://$HUB_DOMAIN"
     haproxy.org/path-rewrite: /api-internal(.*) /_drop_
 spec:
   tls:
@@ -226,7 +226,7 @@ data:
     keyfile = "/ret/key.pem"
 
     [ret."Elixir.RetWeb.Endpoint"]
-    allowed_origins = "*"
+    allowed_origins = "https://<HUB_DOMAIN>,https://status.eduverse.com,,https://portal.classvr.com,https://alpha.classvr.com,https://hubs.localhost,https://hubs.localhost:8080"
     secret_key_base = "<PHX_KEY>"
     allow_crawlers = true
 

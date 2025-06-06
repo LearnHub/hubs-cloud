@@ -59,7 +59,7 @@ spec:
   tls:
   - hosts:
       - $HUB_DOMAIN
-    secretName: cert-hcce
+    secretName: cert-$HUB_DOMAIN
   - hosts:
       - assets-$HUB_DOMAIN
     secretName: cert-assets-$HUB_DOMAIN
@@ -1216,6 +1216,7 @@ spec:
       - name: certs
         secret:
           secretName: cert-stream-$HUB_DOMAIN
+          optional: true
 ---
 apiVersion: v1
 kind: Service
@@ -1263,46 +1264,6 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cert-hcce
-  namespace: $Namespace
-type: kubernetes.io/tls
-data:
-  tls.crt: $initCert
-  tls.key: $initKey
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cert-stream-$HUB_DOMAIN
-  namespace: $Namespace
-type: kubernetes.io/tls
-data:
-  tls.crt: $initCert
-  tls.key: $initKey
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cert-hubs-$HUB_DOMAIN
-  namespace: $Namespace
-type: kubernetes.io/tls
-data:
-  tls.crt: $initCert
-  tls.key: $initKey
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cert-cors-$HUB_DOMAIN
-  namespace: $Namespace
-type: kubernetes.io/tls
-data:
-  tls.crt: $initCert
-  tls.key: $initKey
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cert-assets-$HUB_DOMAIN
   namespace: $Namespace
 type: kubernetes.io/tls
 data:

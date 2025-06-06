@@ -167,7 +167,7 @@ spec:
           service:
             name: dialog
             port:
-              number: 4443
+              number: 443
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -288,7 +288,7 @@ data:
     janus_service_name = ""
     janus_admin_secret = ""
     janus_admin_port = 7000
-    janus_port = 4443
+    janus_port = 443
 
     [ret."Elixir.Ret.Guardian"]
     secret_key = "<GUARDIAN_KEY>"
@@ -1145,8 +1145,8 @@ spec:
         image: $Container_Dockerhub_Username/dialog:$CONTAINER_TAG
         imagePullPolicy: Always
         ports:
-        - hostPort: 4443
-          containerPort: 4443
+        - hostPort: 443
+          containerPort: 443
         env:
         - name: perms_key
           valueFrom:
@@ -1163,8 +1163,8 @@ spec:
   clusterIP: None
   ports:
   - name: https-dialog
-    port: 4443
-    targetPort: 4443
+    port: 443
+    targetPort: 443
   - name: https-dialog-adm
     port: 7000
     targetPort: 7000
@@ -1345,9 +1345,6 @@ spec:
     targetPort: 8080
   - name: https
     port: 443
-    targetPort: 4443
-  - name: dialog
-    port: 4443
     targetPort: 4443
   - name: turn
     port: 5349

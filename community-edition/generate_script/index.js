@@ -192,6 +192,9 @@ function main() {
     replacedContent = handleImageOverrides(processedConfig, replacedContent)
 
     utils.writeOutputFile(replacedContent, "", "hcce.yaml");
+    // AVN: Make a domain-scoped copy in the secrets folder for future reference
+    utils.writeOutputFile(replacedContent, "secrets", `${config.HUB_DOMAIN}.yaml`);
+
 
   } catch (error) {
     console.error("Error in main function:", error);

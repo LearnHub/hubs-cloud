@@ -1,5 +1,6 @@
 /node_modules
 /hcce.yaml
-/secret-values.yaml
+/secrets/*
+!/secrets/readme.md
 /ssl_script/cbb.yaml
 .DS_Store

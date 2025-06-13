@@ -6,3 +6,7 @@
 	path = community-edition/services/reticulum
 	url = https://github.com/LearnHub/reticulum
 	branch = avn-prod
+[submodule "community-edition/services/spoke"]
+	path = community-edition/services/spoke
+	url = https://github.com/LearnHub/Spoke
+	branch = avn-prod

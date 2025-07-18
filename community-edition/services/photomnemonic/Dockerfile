@@ -1,5 +1,5 @@
 # FROM node:lts-alpine
-FROM node:lts-buster
+FROM node:22
 WORKDIR /app
 
 RUN apt-get update && apt-get -y install libnss3 libexpat1

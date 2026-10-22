@@ -144,12 +144,6 @@ function handleImageOverrides(processedConfig, replacedContent) {
           yamlDocuments[index] = new YAML.Document(jsDoc);
         }
       }
-      else if (jsDoc.metadata.name === "coturn") {
-        if (processedConfig.OVERRIDE_COTURN_IMAGE) {
-          jsDoc.spec.template.spec.containers[0].image = processedConfig.OVERRIDE_COTURN_IMAGE;
-          yamlDocuments[index] = new YAML.Document(jsDoc);
-        }
-      }
       else if (jsDoc.metadata.name === "haproxy") {
         if (processedConfig.OVERRIDE_HAPROXY_IMAGE) {
           jsDoc.spec.template.spec.containers[0].image = processedConfig.OVERRIDE_HAPROXY_IMAGE;

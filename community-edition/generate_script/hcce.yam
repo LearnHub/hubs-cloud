@@ -41,6 +41,8 @@ stringData:
   OIDC_CLIENT_ID: "$OIDC_CLIENT_ID"
   OIDC_CLIENT_SECRET: "$OIDC_CLIENT_SECRET"
   OIDC_ADDITIONAL_AUTHORIZATION_PARAMETERS: "$OIDC_ADDITIONAL_AUTHORIZATION_PARAMETERS"
+  CONNECT_CLIENT_ID: "$CONNECT_CLIENT_ID"
+  CONNECT_CLIENT_SECRET: "$CONNECT_CLIENT_SECRET"
 ---
 ######################################################################################
 ###################################### ingress #######################################
@@ -385,9 +387,12 @@ data:
     [ret."Elixir.Ret.Account"]
     admin_email = "<ADM_EMAIL>"
 
-    [ret."Elixir.Ret.Coturn"]
-    realm = "turkey"
-    public_tls_ports = "5349"
+    # AVN: STUN/TURN from AVN Cloud (Cloudflare Realtime TURN) in place of a coturn pod
+    [ret."Elixir.Ret.IceServers"]
+    provider = "avncloud"
+    connect_url = "<CONNECT_REST_URL>"
+    client_id = "<CONNECT_CLIENT_ID>"
+    client_secret = "<CONNECT_CLIENT_SECRET>"
 
     [ret."Elixir.Ret.RemoteOIDCClient"]
     openid_configuration = "<OIDC_OPENID_CONFIGURATION>"
@@ -595,6 +600,18 @@ spec:
             secretKeyRef:
               name: configs
               key: OIDC_ADDITIONAL_AUTHORIZATION_PARAMETERS
+        - name: turkeyCfg_CONNECT_REST_URL
+          value: "$CONNECT_REST_URL"
+        - name: turkeyCfg_CONNECT_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: CONNECT_CLIENT_ID
+        - name: turkeyCfg_CONNECT_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: configs
+              key: CONNECT_CLIENT_SECRET
         - name: turkeyCfg_YTDL_HOST
           value: "http://ytdl:5000"
         - name: turkeyCfg_PHOTOMNEMONIC
@@ -1171,74 +1188,12 @@ spec:
   selector:
     app: dialog
 ---
-########################################################################
-######################   coturn   ######################################
-########################################################################
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: coturn
-  namespace: $Namespace
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: coturn
-  minReadySeconds: 15
-  strategy:
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: coturn
-    spec:
-      hostNetwork: true
-      containers:
-      - name: coturn
-        image: $Container_Dockerhub_Username/coturn:$CONTAINER_TAG
-        imagePullPolicy: Always
-        ports:
-        - hostPort: 5349
-          containerPort: 5349
-        env:
-        - name: REALM
-          value: turkey
-        - name: PSQL
-          valueFrom:
-            secretKeyRef:
-              name: configs
-              key: PSQL
-        volumeMounts:
-        - name: certs
-          mountPath: /certs/
-          readOnly: true
-      volumes:
-      - name: certs
-        secret:
-          secretName: cert-stream-$HUB_DOMAIN
-          optional: true
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: coturn
-  namespace: $Namespace
-spec:
-  ports:
-  - name: https-coturn
-    port: 5349
-    targetPort: 5349
-  selector:
-    app: coturn
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: haproxy-tcp-config
   namespace: $Namespace
-data:
-  5349:
-    $Namespace/coturn:5349
+data: {}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -1346,9 +1301,6 @@ spec:
   - name: https
     port: 443
     targetPort: 4443
-  - name: turn
-    port: 5349
-    targetPort: 5349
 ---
 apiVersion: v1
 kind: ServiceAccount
